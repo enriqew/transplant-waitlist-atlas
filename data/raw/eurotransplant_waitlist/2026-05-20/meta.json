@@ -1,0 +1,92 @@
+{
+  "source": "eurotransplant_waitlist",
+  "snapshot_date": "2026-05-20",
+  "fetched_at": "2026-05-20T04:09:04Z",
+  "pipeline_version": "0.1.0",
+  "files": [
+    {
+      "name": "active_waitlist_by_year_by_country_by_organ__10728-33135.xlsx",
+      "url": "https://statistics.eurotransplant.org/reportloader.php?report=10728-33135&format=xlsx&download=1",
+      "sha256": "5c80632db5bb81863aee5796e21fca98713deca749e435634b989828d7554b6a",
+      "bytes": 8948,
+      "row_count": null
+    },
+    {
+      "name": "yearly_statistics_overview_2025__10789-32916.xlsx",
+      "url": "https://statistics.eurotransplant.org/reportloader.php?report=10789-32916&format=xlsx&download=1",
+      "sha256": "5ad11df77f98e78fa36af8212160ef81a31201e462dd2b817e929bc2e31e4b4e",
+      "bytes": 12285,
+      "row_count": null
+    },
+    {
+      "name": "kidney_registrations_by_year_by_country__10744-33195.xlsx",
+      "url": "https://statistics.eurotransplant.org/reportloader.php?report=10744-33195&format=xlsx&download=1",
+      "sha256": "ecc6c8749fe1346641493a38641eee7775871b73583479fdb053d78d71232bc4",
+      "bytes": 7011,
+      "row_count": null
+    },
+    {
+      "name": "liver_registrations_by_year_by_country__10744-33178.xlsx",
+      "url": "https://statistics.eurotransplant.org/reportloader.php?report=10744-33178&format=xlsx&download=1",
+      "sha256": "68a44d4c627ce3f541f71cc624c5da09952b80bafdcc96742f51c1d1dd3eaab4",
+      "bytes": 6952,
+      "row_count": null
+    },
+    {
+      "name": "heart_registrations_by_year_by_country__10744-33196.xlsx",
+      "url": "https://statistics.eurotransplant.org/reportloader.php?report=10744-33196&format=xlsx&download=1",
+      "sha256": "7e46c87e3ff2c236e2a316c5917e7f0d23bb0b9743cd7e7c5b648a2753aa5210",
+      "bytes": 6821,
+      "row_count": null
+    },
+    {
+      "name": "lung_registrations_by_year_by_country__10744-33197.xlsx",
+      "url": "https://statistics.eurotransplant.org/reportloader.php?report=10744-33197&format=xlsx&download=1",
+      "sha256": "03f9d68711dcbca60d6efa66fe42a2d3e68c149f33104c4ae5d3f79c716af853",
+      "bytes": 6785,
+      "row_count": null
+    },
+    {
+      "name": "pancreas_registrations_by_year_by_country__10744-33176.xlsx",
+      "url": "https://statistics.eurotransplant.org/reportloader.php?report=10744-33176&format=xlsx&download=1",
+      "sha256": "d5bd58667fa82ea6db8b30085c49ccf5b98d688f39715b88c896d310c791b9b1",
+      "bytes": 6716,
+      "row_count": null
+    },
+    {
+      "name": "kidney_removals_by_year_by_country_by_reason__11146-33195.xlsx",
+      "url": "https://statistics.eurotransplant.org/reportloader.php?report=11146-33195&format=xlsx&download=1",
+      "sha256": "e36d4c9de0260035886345d953a7ad6e3cd496f7460561beef39715e171e95aa",
+      "bytes": 8340,
+      "row_count": null
+    },
+    {
+      "name": "liver_removals_by_year_by_country_by_reason__11146-33178.xlsx",
+      "url": "https://statistics.eurotransplant.org/reportloader.php?report=11146-33178&format=xlsx&download=1",
+      "sha256": "995ca47cd5d89fe3987375449d37dba60fa4511394b23d157098569772793bf2",
+      "bytes": 8263,
+      "row_count": null
+    },
+    {
+      "name": "heart_removals_by_year_by_country_by_reason__11146-33196.xlsx",
+      "url": "https://statistics.eurotransplant.org/reportloader.php?report=11146-33196&format=xlsx&download=1",
+      "sha256": "2d9e329e03c7991e6bd0742a71453ab00c5841bc5e27e1127257aae0360e6893",
+      "bytes": 8148,
+      "row_count": null
+    },
+    {
+      "name": "lung_removals_by_year_by_country_by_reason__11146-33197.xlsx",
+      "url": "https://statistics.eurotransplant.org/reportloader.php?report=11146-33197&format=xlsx&download=1",
+      "sha256": "f40ac29a60b927a6bf218f9eb37d143ea95394221a0bac1fbdeafba761cc3661",
+      "bytes": 7551,
+      "row_count": null
+    },
+    {
+      "name": "pancreas_removals_by_year_by_country_by_reason__11146-33176.xlsx",
+      "url": "https://statistics.eurotransplant.org/reportloader.php?report=11146-33176&format=xlsx&download=1",
+      "sha256": "fd39aa0002fb6045c39152bfde2094a41e8cd267ace5d69102ec7c771bf1ca0e",
+      "bytes": 7885,
+      "row_count": null
+    }
+  ]
+}

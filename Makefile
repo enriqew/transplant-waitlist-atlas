@@ -22,8 +22,9 @@ install:
 
 # Sources are added incrementally. Each is independent — fail loud, no silent skips.
 ingest:
-	$(PYTHON) -m ingest.cenatra_waitlist --snapshot-date $(SNAPSHOT_DATE)
-	$(PYTHON) -m ingest.optn_waitlist    --snapshot-date $(SNAPSHOT_DATE)
+	$(PYTHON) -m ingest.cenatra_waitlist        --snapshot-date $(SNAPSHOT_DATE)
+	$(PYTHON) -m ingest.eurotransplant_waitlist --snapshot-date $(SNAPSHOT_DATE)
+	$(PYTHON) -m ingest.optn_waitlist           --snapshot-date $(SNAPSHOT_DATE)
 
 build:
 	cd $(DBT_DIR) && dbt deps && dbt seed && dbt run
