@@ -61,7 +61,14 @@ def _write_json(path: Path, payload: object, *, log: logging.Logger) -> None:
 
 
 def _build_world_waitlist(con: duckdb.DuckDBPyConnection) -> list[dict]:
-    """One record per (country, year, organ). Drives the world choropleth."""
+    """One record per (country, year, organ). Drives the world choropleth.
+
+    OPTN does not publish a historical year-end stock series. We derive one by
+    forward-running `additions - removals` per (year, organ) and anchoring the
+    series so the latest year matches the OPTN current-snapshot total. The
+    derived rows are emitted with `source = 'OPTN (derived)'` so the map can
+    flag them in the tooltip if desired.
+    """
 
     rows = con.execute(
         """
@@ -70,7 +77,7 @@ def _build_world_waitlist(con: duckdb.DuckDBPyConnection) -> list[dict]:
         ORDER BY country_iso3, year, organ
         """
     ).fetchall()
-    return [
+    payload: list[dict] = [
         {
             "country_iso3": r[0],
             "year": int(r[1]),
@@ -80,6 +87,97 @@ def _build_world_waitlist(con: duckdb.DuckDBPyConnection) -> list[dict]:
         }
         for r in rows
     ]
+    payload.extend(_derive_us_yearly_stock(con))
+    return payload
+
+
+def _derive_us_yearly_stock(con: duckdb.DuckDBPyConnection) -> list[dict]:
+    """Derive year-end US waitlist stock per organ via running sum of
+    (additions - removals), anchored to the current OPTN snapshot total."""
+
+    additions = {
+        (int(y), o): int(p)
+        for y, o, p in con.execute(
+            """
+            SELECT year, organ, SUM(patients) AS p
+            FROM main_silver.stg_optn_waitlist
+            WHERE metric_type = 'additions' AND year IS NOT NULL
+            GROUP BY year, organ
+            """
+        ).fetchall()
+    }
+    removals = {
+        (int(y), o): int(p)
+        for y, o, p in con.execute(
+            """
+            SELECT year, organ, SUM(patients) AS p
+            FROM main_silver.stg_optn_waitlist
+            WHERE metric_type = 'removals' AND year IS NOT NULL
+            GROUP BY year, organ
+            """
+        ).fetchall()
+    }
+    # Current snapshot total per organ — anchors the derived series so the
+    # most recent year matches the published "as of" number.
+    current = {
+        o: int(p)
+        for o, p in con.execute(
+            """
+            SELECT organ, SUM(patients) AS p
+            FROM main_silver.stg_optn_waitlist
+            WHERE metric_type = 'stock' AND year IS NULL
+            GROUP BY organ
+            """
+        ).fetchall()
+    }
+
+    organs = sorted({o for (_, o) in additions} | {o for (_, o) in removals})
+    if not organs:
+        return []
+
+    rows: list[dict] = []
+    for organ in organs:
+        years = sorted({y for (y, o) in additions if o == organ} | {y for (y, o) in removals if o == organ})
+        if not years:
+            continue
+        # Walk forward from year 0, accumulating net flow. After the loop,
+        # shift the whole series so the final year hits the current snapshot.
+        cumulative: list[tuple[int, int]] = []
+        running = 0
+        for y in years:
+            running += additions.get((y, organ), 0)
+            running -= removals.get((y, organ), 0)
+            cumulative.append((y, running))
+        latest_year, latest_value = cumulative[-1]
+        anchor = current.get(organ)
+        if anchor is None or latest_value == 0:
+            # Without an anchor we can still emit the raw running sum; tooltip
+            # will mark it as derived.
+            shift = 0
+            scale = 1.0
+        else:
+            # Two adjustments are possible: a shift (additive) or a scale
+            # (multiplicative). A shift preserves yearly deltas; a scale
+            # preserves the SHAPE of the curve relative to the present.
+            # Empirically the running sum drifts low because OPTN treats
+            # multi-organ candidates inconsistently across additions/removals,
+            # so we use a multiplicative scale to match the anchor.
+            scale = anchor / latest_value if latest_value > 0 else 1.0
+            shift = 0
+        for y, v in cumulative:
+            stock = max(int(round(v * scale + shift)), 0)
+            if stock == 0:
+                continue
+            rows.append(
+                {
+                    "country_iso3": "USA",
+                    "year": y,
+                    "organ": organ,
+                    "patients": stock,
+                    "source": "OPTN (derived)",
+                }
+            )
+    return rows
 
 
 def _build_mexico_waitlist(con: duckdb.DuckDBPyConnection) -> list[dict]:
