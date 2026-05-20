@@ -1,0 +1,36 @@
+{
+  "source": "optn_waitlist",
+  "snapshot_date": "2026-05-19",
+  "fetched_at": "2026-05-20T05:10:10Z",
+  "pipeline_version": "0.1.0",
+  "files": [
+    {
+      "name": "Waitlist___Organ_by_Waiting_List_Status.csv",
+      "url": "https://optn.transplant.hrsa.gov/data/view-data-reports/build-advanced/",
+      "sha256": "1bf62d3e706fde43091a78a859ecb238f4856d256f56812fc824f37f556f1c72",
+      "bytes": 2397,
+      "row_count": 37
+    },
+    {
+      "name": "Waitlist_Additions___Organ_by_List_Year,_Waiting_List_Status_at_Listing.csv",
+      "url": "https://optn.transplant.hrsa.gov/data/view-data-reports/build-advanced/",
+      "sha256": "010e4e499d844d49210eb12cc31e9862ee965d009ce3339093bfc0047ed4baae",
+      "bytes": 69419,
+      "row_count": 1012
+    },
+    {
+      "name": "Waitlist_Removals___Organ_by_Removal_Year,_Removal_Reason,_Waiting_List_Status_at_Removal.csv",
+      "url": "https://optn.transplant.hrsa.gov/data/view-data-reports/build-advanced/",
+      "sha256": "d6367b7a1fc143f54cb5c81cc34972d8270750e33c63d1aba733f33cfa9dbfac",
+      "bytes": 621934,
+      "row_count": 9431
+    }
+  ],
+  "data_as_of": "2026-05-18",
+  "acquisition": "manual (Build Advanced UI download by operator)",
+  "build_queries": {
+    "Waitlist___Organ_by_Waiting_List_Status.csv": "Category=Waiting List; Output=Candidates on the OPTN Waiting List; Columns=Organ (19 items); Rows=Waiting List Status (70 items); Measure=Candidates",
+    "Waitlist_Additions___Organ_by_List_Year,_Waiting_List_Status_at_Listing.csv": "Category=Waiting List Additions; Columns=Organ; Rows=List Year, Waiting List Status at Listing; Measure=Candidates",
+    "Waitlist_Removals___Organ_by_Removal_Year,_Removal_Reason,_Waiting_List_Status_at_Removal.csv": "Category=Waiting List Removals; Columns=Organ; Rows=Removal Year, Removal Reason, Waiting List Status at Removal; Measure=Candidates"
+  }
+}
