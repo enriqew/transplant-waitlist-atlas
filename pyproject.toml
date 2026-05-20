@@ -21,6 +21,7 @@ dependencies = [
     "python-slugify>=8.0.4",
     "jsonschema>=4.23.0",
     "click>=8.1.7",
+    "openpyxl>=3.1.0",
 ]
 
 [project.optional-dependencies]

@@ -33,6 +33,7 @@ build: prebuild
 # reports into long-format CSVs that dbt staging can read.
 prebuild:
 	$(PYTHON) $(DBT_DIR)/analyses/optn_pivot_to_long.py
+	$(PYTHON) $(DBT_DIR)/analyses/eurotransplant_xlsx_to_long.py
 
 test:
 	cd $(DBT_DIR) && dbt test
