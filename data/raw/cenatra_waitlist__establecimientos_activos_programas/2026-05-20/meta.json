@@ -1,0 +1,162 @@
+{
+  "source": "cenatra_waitlist__establecimientos_activos_programas",
+  "snapshot_date": "2026-05-20",
+  "fetched_at": "2026-05-20T03:24:19Z",
+  "pipeline_version": "0.1.0",
+  "files": [
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(4to_trimestre_2025).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/establecimientos_4totrimestre_2025.csv",
+      "sha256": "0aa79a0ddeccb691ff5c887d83457fc13fb312492d4beeb4791f01e2687d97c5",
+      "bytes": 89275,
+      "row_count": 603
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(1er_trimestre_2025).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_1_Establecimientos1erTrimestre2025.csv",
+      "sha256": "807e30e06e011ccfe7c2da9a69d6fab56d9d980fe0ed48348fc18a3d2e401510",
+      "bytes": 83099,
+      "row_count": 594
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(4to_trimestre_2024).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_2_Establecimientos4toTrimestre2024.csv",
+      "sha256": "65ab1b391d04d4523640fddc2608f1b34c6a760bd75cd5fe970903254d2908d0",
+      "bytes": 82683,
+      "row_count": 591
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(3er_trimestre_2024).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_3_Establecimientos3erTrimestre2024.csv",
+      "sha256": "6bb4b433d5e8c68aafd5e1f4a9fa57a18f20d60e617eb83be2192acdb2a6fcc9",
+      "bytes": 83385,
+      "row_count": 589
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(2do_trimestre_2024).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_4_Establecimientos2doTrimestre2024.csv",
+      "sha256": "544ed64fff479b54adf3f0da2ef27772801f4be4c7dcd061b7ec254112f37e11",
+      "bytes": 80599,
+      "row_count": 586
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(1er_trimestre_2024).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_5_Establecimientos1erTrimestre2024.csv",
+      "sha256": "c2cea4df210a3c0f823f69a85acbf61eeba55db85101126fd7e78c656aeb7ac1",
+      "bytes": 79862,
+      "row_count": 581
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(4to_trimestre_2023).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_6_Establecimientos4toTrimestre2023.csv",
+      "sha256": "d626a5d0cdbae2eda4049d710bc1bbfe76d442a01f31d9343cdb61a604e73f7c",
+      "bytes": 79523,
+      "row_count": 580
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(3er_trimestre_2023).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_7_Establecimientos3erTrimestre2023.csv",
+      "sha256": "dd88ce2bf73094b141447417096dd0d61721b8b92105de261fab98b060a89668",
+      "bytes": 78281,
+      "row_count": 572
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(2do_trimestre_2023).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_8_Establecimientos2doTrimestre2023.csv",
+      "sha256": "485e4cf5f614343b3940adb3574e61ce4f9b6b5c260c6a37687126eba5a9fb4e",
+      "bytes": 78476,
+      "row_count": 574
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(1er_trimestre_2023).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_9_Establecimientos1erTrimestre2023.csv",
+      "sha256": "7aa2ae2ab169a599b767ac9c10f6bfd1c914468d95c56e1230e774f0d04b755a",
+      "bytes": 78344,
+      "row_count": 574
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(4to_trimestre_2022).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_10_Establecimientos4toTrimestre2022.csv",
+      "sha256": "51f8d0d3f644490da9704c4552c08726861a3af44a7f1f399fd8154e8250180b",
+      "bytes": 77667,
+      "row_count": 570
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(3er_trimestre_2022).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_11_Establecimientos3erTrimestre2022.csv",
+      "sha256": "e921dd9bd3d18d1d06e8928a20c69f226f523f15d9fbf59886d85ee64a4a5fc4",
+      "bytes": 76693,
+      "row_count": 563
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(2do_trimestre_2022).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_12_Establecimientos2doTrimestre2022.csv",
+      "sha256": "aca2c55fc122cd87ba78bd46ab3d43fd3cdee5fcf37bcf4547d48edda141f2ec",
+      "bytes": 75743,
+      "row_count": 558
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(1er_trimestre_2022).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_13_Establecimientos1erTrimestre2022.csv",
+      "sha256": "e8c14e0056c56190bc055ae6d56e5d3b78c84593c9c4a41b2430f089173698c7",
+      "bytes": 75540,
+      "row_count": 557
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(4to_trimestre_2021).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_14_Establecimientos4toTrimestre2021.csv",
+      "sha256": "7f102563eb1f0741f536f7ec486bfcd666b3e0acae3e1e2cbf03261dbac5ce26",
+      "bytes": 74853,
+      "row_count": 552
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(3er_trimestre_2021).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_15_Establecimientos3erTrimestre2021.csv",
+      "sha256": "930539981788d48327768c07b63eb191b3b4a4b36d6f791368828889b47b730b",
+      "bytes": 74661,
+      "row_count": 551
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(2do_trimestre_2021).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_16_Establecimientos2doTrimestre2021.csv",
+      "sha256": "dfc72bdcf4976f22ced9c0eca4def46ce0f56c40eb79bb797c67cb4e0fdba191",
+      "bytes": 74638,
+      "row_count": 552
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(1er_trimestre_2021).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_17_Establecimientos1erTrimestre2021.csv",
+      "sha256": "e74ca1d9ddca73170c5a3970e584f7a19da3f1879e29445843b3557eb7d35985",
+      "bytes": 74367,
+      "row_count": 550
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(4to_trimestre_2020).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_18_Establecimientos4toTrimestre2020.csv",
+      "sha256": "3f58aa562c93294c613cd36786295935be08d320d564712ab5c9d3e7a599a5dc",
+      "bytes": 74647,
+      "row_count": 551
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(3er_trimestre_2020).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_19_Establecimientos3erTrimestre2020.csv",
+      "sha256": "2dc574fa21e2b92f5f5d4046a9244a97b912dff89b797a2d8501d9ef2400b906",
+      "bytes": 74328,
+      "row_count": 549
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(2do_trimestre_2020).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_20_Establecimientos2doTrimestre2020.csv",
+      "sha256": "bfbabd9f1b936432a9e6c566733faf30446a77f0c749ede3508142db8ffa7f0f",
+      "bytes": 73561,
+      "row_count": 549
+    },
+    {
+      "name": "Establecimientos_activos_y_sus_programas_(1er_trimestre_2020).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/establecimientos_activos_programas/CENATRA_21_Establecimientos1erTrimestre2020.csv",
+      "sha256": "29ff4f26794fef837c1bc51544160cb3dd85469f54a82e40b05ff1ec5ebf1b2b",
+      "bytes": 73411,
+      "row_count": 548
+    }
+  ]
+}

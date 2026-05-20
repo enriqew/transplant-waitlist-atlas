@@ -1,0 +1,162 @@
+{
+  "source": "cenatra_waitlist__pacientes_espera_organo_tejido",
+  "snapshot_date": "2026-05-20",
+  "fetched_at": "2026-05-20T03:23:59Z",
+  "pipeline_version": "0.1.0",
+  "files": [
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(4to_trimestre_2025).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/pacientes_espera_4toTrimestre2025.csv",
+      "sha256": "30286239d286b42b2c2d4404aaa4835c10ba55b6d72ba7f181d39c62ef3cf57d",
+      "bytes": 3920299,
+      "row_count": 18968
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(1er_trimestre_2025).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_59_Pacientes_espera1erTrimestre2025.csv",
+      "sha256": "77c6ba4e1ce6b5fec4afe6e57dbf01f9208eeb24606f1f98e4648a9a54dc4b61",
+      "bytes": 3587393,
+      "row_count": 18885
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(4to_trimestre_2024).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_60_Pacientes_espera4toTrimestre2024.csv",
+      "sha256": "d1be5790afc29697804a79e5dc90a231071c5a39d1512438ff316d7b2ab543fd",
+      "bytes": 3756976,
+      "row_count": 19819
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(3er_trimestre_2024).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_61_Pacientes_espera3erTrimestre2024.csv",
+      "sha256": "88a7949952b2655e722947f892dc191296c6366e5baa243ee1e105428d09f915",
+      "bytes": 3729542,
+      "row_count": 19612
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(2do_trimestre_2024).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_62_Pacientes_espera2doTrimestre2024.csv",
+      "sha256": "c20c92052f745b172778d3c9359821b1f71961a2cdf884f85490238c3116e26e",
+      "bytes": 3799784,
+      "row_count": 19985
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(1er_trimestre_2024).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_63_Pacientes_espera1erTrimestre2024.csv",
+      "sha256": "02c3141f5de0f95c906b6844d1931b87ff3d5d6c35ae1d3aeed6a9eec2ee0b0e",
+      "bytes": 4589178,
+      "row_count": 20125
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(4to_trimestre_2023).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_64_Pacientes_espera4toTrimestre2023.csv",
+      "sha256": "dcfd4d8b530d5ca7b1e1e0e5f5846003c81246bdc97b81a0188772a5f98023d1",
+      "bytes": 4574435,
+      "row_count": 20035
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(3er_trimestre_2023).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_65_Pacientes_espera3erTrimestre2023.csv",
+      "sha256": "b614cc1c872b73dbc4390fc65542fa11986e5081cb348254379d046219ec19cb",
+      "bytes": 2818381,
+      "row_count": 14647
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(2do_trimestre_2023).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_66_Pacientes_espera2doTrimestre2023.csv",
+      "sha256": "4717f75b0d27b16c51ccb0f4cdb3147209494328081de469b65d38b53ca1de86",
+      "bytes": 2968492,
+      "row_count": 15637
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(1er_trimestre_2023).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_67_Pacientes_espera1erTrimestre2023.csv",
+      "sha256": "c340f94bd6d9f93d3b31f9ddc69ca47c9e8fdacf9c2209bb35c9277159310a98",
+      "bytes": 3850741,
+      "row_count": 20445
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(4to_trimestre_2022).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_68_Pacientes_espera4toTrimestre2022.csv",
+      "sha256": "f8fb6137e9a86e001910777bff4b44126a727332341fa4d1bae958ca4706350a",
+      "bytes": 3778518,
+      "row_count": 20119
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(3er_trimestre_2022).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_69_Pacientes_espera3erTrimestre2022.csv",
+      "sha256": "2293f8059a6148dbecf2504be7bb048b63d6eacbd8000c6cc349826e04374ebe",
+      "bytes": 4524645,
+      "row_count": 20041
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(2do_trimestre_2022).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_70_Pacientes_espera2doTrimestre2022.csv",
+      "sha256": "334c555270f68899746384ac9401e559a58f5d2c325b1c5eedf8e583563e7bca",
+      "bytes": 4200257,
+      "row_count": 22694
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(1er_trimestre_2022).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_71_Pacientes_espera1erTrimestre2022.csv",
+      "sha256": "7296bee288102d5d0eb48857285dce1ea6006b586b69aa3396fd1a49eb9c1f08",
+      "bytes": 4206174,
+      "row_count": 22834
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(4to_trimestre_2021).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_72_Pacientes_espera4toTrimestre2021.csv",
+      "sha256": "2b773f81b7497b7c97edc0dcdb8d730b27de81f4546e4a44055fe4fd5739aa96",
+      "bytes": 4233025,
+      "row_count": 23010
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(3er_trimestre_2021).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_73_Pacientes_espera3erTrimestre2021.csv",
+      "sha256": "c97fba742eedb20b71e1b68ff8266427bb03788db166114b8fe02a851baac735",
+      "bytes": 4212730,
+      "row_count": 22907
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(2do_trimestre_2021).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_74_Pacientes_espera2doTrimestre2021.csv",
+      "sha256": "542ad2567f078c01830dd16d1469fe178de5c0e6e0b8c2331e3698f183166a0e",
+      "bytes": 4255452,
+      "row_count": 23105
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(1er_trimestre_2021).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_75_Pacientes_espera1erTrimestre2021.csv",
+      "sha256": "12a97b3fd1169a4fc1da2f46ff1c7cdbf8381ced7b25fd8ec795c8a3d32d1f14",
+      "bytes": 4285569,
+      "row_count": 23297
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(4to_trimestre_2020).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_76_Pacientes_espera4toTrimestre2020.csv",
+      "sha256": "27ee60c091d510b10157864d8e534ee0396851f71b0ed5fea30402e41504d2b0",
+      "bytes": 4272645,
+      "row_count": 23210
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(3er_trimestre_2020).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_77_Pacientes_espera3erTrimestre2020.csv",
+      "sha256": "3472795fce501957c355e8fdfffa8e068826d660f9938530fb482a959e558e6c",
+      "bytes": 4333240,
+      "row_count": 23543
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(2do_trimestre_2020).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_78_Pacientes_espera2doTrimestre2020.csv",
+      "sha256": "c2a106e2c094f41c19465d0b2addec16c11c7b18085ab9b23d239b89950cdb96",
+      "bytes": 4289579,
+      "row_count": 23488
+    },
+    {
+      "name": "Pacientes_en_espera_de_un_órgano_o_tejido_(1er_trimestre_2020).csv",
+      "url": "https://repodatos.atdt.gob.mx/api_update/cenatra/pacientes_espera_organo_tejido/CENATRA_79_Pacientes_espera1erTrimestre2020.csv",
+      "sha256": "87f70bb223c0b8bc140502485910097d26630814df4d0d4077d1b78a55658115",
+      "bytes": 4289877,
+      "row_count": 23499
+    }
+  ]
+}
