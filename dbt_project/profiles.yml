@@ -1,0 +1,7 @@
+transplant_waitlist_atlas:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('TRANSPLANT_WAITLIST_DUCKDB', '../data/duckdb/waitlist.duckdb') }}"
+      threads: 4

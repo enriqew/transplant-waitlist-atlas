@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: fct_waitlist_country_year_organ
+    description: "World waitlist stock by country × year × organ. Drives the choropleth."
+    columns:
+      - name: country_iso3
+        tests: [not_null]
+      - name: year
+        tests: [not_null]
+      - name: organ
+        tests: [not_null]
+      - name: patients
+        tests: [not_null]
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [country_iso3, year, organ, source]
+
+  - name: fct_waitlist_removals
+    description: "Fate distribution of waitlist removals by country × year × organ × reason."
+    columns:
+      - name: country_iso3
+        tests: [not_null]
+      - name: year
+        tests: [not_null]
+      - name: organ
+        tests: [not_null]
+      - name: reason_bucket
+        tests:
+          - not_null
+          - accepted_values:
+              values: [transplanted_deceased, transplanted_living, died_waiting, removed_too_sick, improved, other]
+      - name: patients
+        tests: [not_null]
+
+  - name: fct_waitlist_mx_state_quarter_organ
+    description: "México drill-down: quarterly waitlist size by state × organ."
+    columns:
+      - name: region_code
+        tests: [not_null]
+      - name: year
+        tests: [not_null]
+      - name: quarter
+        tests: [not_null]
+      - name: organ
+        tests: [not_null]
+      - name: patients
+        tests: [not_null]
