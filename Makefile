@@ -3,7 +3,7 @@ PYTHON ?= python
 SNAPSHOT_DATE ?= $(shell date -u +%Y-%m-%d)
 DBT_DIR := dbt_project
 
-.PHONY: help install ingest build test export all clean format lint
+.PHONY: help install ingest prebuild build test export all clean format lint
 
 help:
 	@echo "Targets:"
@@ -26,8 +26,13 @@ ingest:
 	$(PYTHON) -m ingest.eurotransplant_waitlist --snapshot-date $(SNAPSHOT_DATE)
 	$(PYTHON) -m ingest.optn_waitlist           --snapshot-date $(SNAPSHOT_DATE)
 
-build:
+build: prebuild
 	cd $(DBT_DIR) && dbt deps && dbt seed && dbt run
+
+# Prebuild: source-specific Python flatteners that turn pivot CSVs / XLSX
+# reports into long-format CSVs that dbt staging can read.
+prebuild:
+	$(PYTHON) $(DBT_DIR)/analyses/optn_pivot_to_long.py
 
 test:
 	cd $(DBT_DIR) && dbt test
