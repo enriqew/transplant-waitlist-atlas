@@ -1,0 +1,47 @@
+SHELL := /bin/bash
+PYTHON ?= python
+SNAPSHOT_DATE ?= $(shell date -u +%Y-%m-%d)
+DBT_DIR := dbt_project
+
+.PHONY: help install ingest build test export all clean format lint
+
+help:
+	@echo "Targets:"
+	@echo "  install   Install dependencies (editable + dev extras)"
+	@echo "  ingest    Run all bronze ingest scripts for SNAPSHOT_DATE=$(SNAPSHOT_DATE)"
+	@echo "  build     dbt deps + seed + run"
+	@echo "  test      dbt test + pytest"
+	@echo "  export    Build final JSON artifacts"
+	@echo "  all       ingest + build + test + export"
+	@echo "  clean     Remove DuckDB and exports"
+	@echo "  format    Run ruff format"
+	@echo "  lint      Run ruff check"
+
+install:
+	$(PYTHON) -m pip install -e ".[dev]"
+
+# Sources are added incrementally. Each is independent — fail loud, no silent skips.
+ingest:
+	$(PYTHON) -m ingest.cenatra_waitlist --snapshot-date $(SNAPSHOT_DATE)
+	$(PYTHON) -m ingest.optn_waitlist    --snapshot-date $(SNAPSHOT_DATE)
+
+build:
+	cd $(DBT_DIR) && dbt deps && dbt seed && dbt run
+
+test:
+	cd $(DBT_DIR) && dbt test
+	pytest
+
+export:
+	$(PYTHON) -m export.build_artifacts --snapshot-date $(SNAPSHOT_DATE)
+
+all: ingest build test export
+
+clean:
+	rm -rf data/duckdb data/exports
+
+format:
+	ruff format ingest export tests 2>/dev/null || true
+
+lint:
+	ruff check ingest export tests 2>/dev/null || true

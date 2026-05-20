@@ -1,0 +1,47 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Secrets — defensive, the pipeline does not require any
+.env
+.env.*
+!.env.example
+
+# Bronze raw snapshots — commit only the meta.json sidecars
+data/raw/**
+!data/raw/
+!data/raw/**/
+!data/raw/**/meta.json
+
+# DuckDB working files + any runtime-generated material under data/duckdb/
+data/duckdb/*.duckdb
+data/duckdb/*.duckdb.wal
+data/duckdb/*.tmp
+data/duckdb/*.pem
+
+# dbt artefacts
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+.user.yml
+
+# Logs / temp
+*.log
+*.tmp
+.DS_Store
