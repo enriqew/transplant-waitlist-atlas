@@ -49,7 +49,7 @@ test:
 	pytest
 
 export:
-	$(PYTHON) -m export.build_artifacts --snapshot-date $(SNAPSHOT_DATE)
+	TRANSPLANT_WAITLIST_RAW_ROOT=$(CURDIR)/data/raw $(PYTHON) -m export.build_artifacts
 
 all: ingest build test export
 
