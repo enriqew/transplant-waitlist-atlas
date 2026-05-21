@@ -39,6 +39,24 @@ cenatra_year_end AS (
     FROM {{ ref('stg_cenatra_waitlist') }}
     WHERE metric_type = 'stock' AND quarter = 4
     GROUP BY 1, 2, 3, 5
+),
+
+nhsbt_stock AS (
+    -- NHSBT year = fiscal year end (31 March). ~3-month offset vs. other
+    -- December year-end sources; acceptable for the world choropleth.
+    SELECT country_iso3, year, organ, SUM(patients) AS patients, source
+    FROM {{ ref('stg_nhsbt_waitlist') }}
+    WHERE metric_type = 'stock'
+    GROUP BY 1, 2, 3, 5
+),
+
+ont_stock AS (
+    -- ONT year = calendar year end (31 December). Active patients only
+    -- (temporarily excluded patients not counted, matching ONT "Activo" metric).
+    SELECT country_iso3, year, organ, SUM(patients) AS patients, source
+    FROM {{ ref('stg_ont_waitlist') }}
+    WHERE metric_type = 'stock'
+    GROUP BY 1, 2, 3, 5
 )
 
 SELECT country_iso3, year, organ, patients, source FROM optn_stock
@@ -46,3 +64,7 @@ UNION ALL
 SELECT country_iso3, year, organ, patients, source FROM eurotransplant_stock
 UNION ALL
 SELECT country_iso3, year, organ, patients, source FROM cenatra_year_end
+UNION ALL
+SELECT country_iso3, year, organ, patients, source FROM nhsbt_stock
+UNION ALL
+SELECT country_iso3, year, organ, patients, source FROM ont_stock

@@ -25,6 +25,8 @@ ingest:
 	$(PYTHON) -m ingest.cenatra_waitlist        --snapshot-date $(SNAPSHOT_DATE)
 	$(PYTHON) -m ingest.eurotransplant_waitlist --snapshot-date $(SNAPSHOT_DATE)
 	$(PYTHON) -m ingest.optn_waitlist           --snapshot-date $(SNAPSHOT_DATE)
+	$(PYTHON) -m ingest.nhsbt_waitlist          --snapshot-date $(SNAPSHOT_DATE)
+	$(PYTHON) -m ingest.ont_waitlist            --snapshot-date $(SNAPSHOT_DATE)
 
 build: prebuild
 	cd $(DBT_DIR) && dbt deps && dbt seed && dbt run
@@ -35,6 +37,8 @@ prebuild:
 	$(PYTHON) $(DBT_DIR)/analyses/cenatra_waitlist_to_long.py
 	$(PYTHON) $(DBT_DIR)/analyses/optn_pivot_to_long.py
 	$(PYTHON) $(DBT_DIR)/analyses/eurotransplant_xlsx_to_long.py
+	$(PYTHON) $(DBT_DIR)/analyses/nhsbt_pdf_to_long.py
+	$(PYTHON) $(DBT_DIR)/analyses/ont_pdf_to_long.py
 
 test:
 	cd $(DBT_DIR) && dbt test

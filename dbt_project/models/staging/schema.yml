@@ -40,6 +40,44 @@ models:
       - name: patients
         tests: [not_null]
 
+  - name: stg_nhsbt_waitlist
+    description: "NHS Blood and Transplant waitlist — UK fiscal year-end snapshot by organ."
+    columns:
+      - name: source
+        tests: [{accepted_values: {values: [NHSBT]}}, not_null]
+      - name: country_iso3
+        tests: [{accepted_values: {values: [GBR]}}, not_null]
+      - name: metric_type
+        tests: [{accepted_values: {values: [stock]}}, not_null]
+      - name: year
+        tests: [not_null]
+      - name: organ
+        tests:
+          - not_null
+          - accepted_values:
+              values: [kidney, liver, heart, lung, pancreas, intestine]
+      - name: patients
+        tests: [not_null]
+
+  - name: stg_ont_waitlist
+    description: "ONT España waitlist — calendar year-end active patients by organ (kidney, heart, liver, lung)."
+    columns:
+      - name: source
+        tests: [{accepted_values: {values: [ONT]}}, not_null]
+      - name: country_iso3
+        tests: [{accepted_values: {values: [ESP]}}, not_null]
+      - name: metric_type
+        tests: [{accepted_values: {values: [stock]}}, not_null]
+      - name: year
+        tests: [not_null]
+      - name: organ
+        tests:
+          - not_null
+          - accepted_values:
+              values: [kidney, liver, heart, lung]
+      - name: patients
+        tests: [not_null]
+
   - name: stg_cenatra_waitlist
     description: "CENATRA México waiting list — quarterly snapshots, state × organ."
     columns:
