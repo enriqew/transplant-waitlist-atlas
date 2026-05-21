@@ -38,6 +38,11 @@ ORGAN_BY_KEYWORD: dict[str, str] = {
     "cardiaco": "heart",
     "hepatico": "liver",
     "pulmonar": "lung",
+    # English names used by our ingest script (ont-kidney-YYYY.pdf, etc.)
+    "kidney": "kidney",
+    "heart": "heart",
+    "liver": "liver",
+    "lung": "lung",
 }
 
 # Trend charts span exactly 10 years back from the reporting year.
