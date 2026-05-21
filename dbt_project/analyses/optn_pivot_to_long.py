@@ -280,7 +280,7 @@ def main() -> int:
         counts["removals"] = _parse_removals(snapshot / REMOVALS_FILE, writer)
 
     total = sum(counts.values())
-    print(f"wrote {total:,} rows → {out_path}")
+    print(f"wrote {total:,} rows -> {out_path}")
     print(f"  stock={counts['stock']:,}  additions={counts['additions']:,}  removals={counts['removals']:,}")
     return 0 if total > 0 else 1
 

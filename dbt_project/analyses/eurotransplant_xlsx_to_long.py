@@ -174,7 +174,7 @@ def main() -> int:
         )
         n = _parse_active_waitlist(active_path, writer)
 
-    print(f"wrote {n:,} rows → {out_path}")
+    print(f"wrote {n:,} rows -> {out_path}")
     return 0 if n > 0 else 1
 
 

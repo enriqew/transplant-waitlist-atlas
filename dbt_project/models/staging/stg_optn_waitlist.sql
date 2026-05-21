@@ -28,5 +28,5 @@ FROM read_csv_auto(
     header=true,
     ignore_errors=false
 )
-WHERE patients IS NOT NULL
-  AND patients > 0
+WHERE TRY_CAST(patients AS INTEGER) IS NOT NULL
+  AND TRY_CAST(patients AS INTEGER) > 0

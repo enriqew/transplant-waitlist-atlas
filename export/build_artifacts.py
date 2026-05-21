@@ -289,7 +289,10 @@ def _build_meta(con: duckdb.DuckDBPyConnection) -> dict:
         "coverage": {
             "countries_world": int(summary[3]),
             "world_years": [int(summary[4]), int(summary[5])],
-            "removals_years": [int(summary[6]), int(summary[7])],
+            "removals_years": [
+                int(summary[6]) if summary[6] is not None else None,
+                int(summary[7]) if summary[7] is not None else None,
+            ],
         },
     }
 

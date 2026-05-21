@@ -216,7 +216,7 @@ def main() -> int:
         for (year, quarter, state, organ), n in sorted(counts.items()):
             writer.writerow(["stock", "MEX", state, year, quarter, organ, n])
 
-    print(f"wrote {len(counts):,} aggregate rows → {out_path}")
+    print(f"wrote {len(counts):,} aggregate rows -> {out_path}")
     print(
         f"  files={files_processed}  patient_rows_seen={rows_seen:,}  "
         f"dropped_no_state={rows_dropped_no_state:,}  "
