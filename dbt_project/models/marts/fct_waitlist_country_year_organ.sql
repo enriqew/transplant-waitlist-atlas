@@ -57,6 +57,15 @@ ont_stock AS (
     FROM {{ ref('stg_ont_waitlist') }}
     WHERE metric_type = 'stock'
     GROUP BY 1, 2, 3, 5
+),
+
+scandiatransplant_stock AS (
+    -- Kidney only; Q4 year-end stock (active + on-hold) per country.
+    -- Countries: DNK, SWE, NOR, FIN, EST.
+    SELECT country_iso3, year, organ, SUM(patients) AS patients, source
+    FROM {{ ref('stg_scandiatransplant_waitlist') }}
+    WHERE metric_type = 'stock'
+    GROUP BY 1, 2, 3, 5
 )
 
 SELECT country_iso3, year, organ, patients, source FROM optn_stock
@@ -68,3 +77,5 @@ UNION ALL
 SELECT country_iso3, year, organ, patients, source FROM nhsbt_stock
 UNION ALL
 SELECT country_iso3, year, organ, patients, source FROM ont_stock
+UNION ALL
+SELECT country_iso3, year, organ, patients, source FROM scandiatransplant_stock
