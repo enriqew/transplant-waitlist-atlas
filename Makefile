@@ -37,7 +37,7 @@ build: prebuild
 # reports into long-format CSVs that dbt staging can read.
 prebuild:
 	$(PYTHON) $(DBT_DIR)/analyses/cenatra_waitlist_to_long.py
-	$(PYTHON) $(DBT_DIR)/analyses/optn_pivot_to_long.py
+	-$(PYTHON) $(DBT_DIR)/analyses/optn_pivot_to_long.py
 	$(PYTHON) $(DBT_DIR)/analyses/eurotransplant_xlsx_to_long.py
 	$(PYTHON) $(DBT_DIR)/analyses/nhsbt_pdf_to_long.py
 	$(PYTHON) $(DBT_DIR)/analyses/ont_pdf_to_long.py
