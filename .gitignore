@@ -41,6 +41,12 @@ dbt_project/dbt_packages/
 dbt_project/logs/
 .user.yml
 
+# Claude Code session data — not for version control
+.claude/
+
+# Temporary working files (scratch PDFs, diagnostics)
+data/tmp/
+
 # Logs / temp
 *.log
 *.tmp
