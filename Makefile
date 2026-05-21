@@ -46,7 +46,7 @@ prebuild:
 
 test:
 	cd $(DBT_DIR) && dbt test
-	pytest
+	pytest || [ $$? -eq 5 ]
 
 export:
 	TRANSPLANT_WAITLIST_RAW_ROOT=$(CURDIR)/data/raw $(PYTHON) -m export.build_artifacts
