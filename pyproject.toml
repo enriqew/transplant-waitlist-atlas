@@ -10,10 +10,6 @@ dependencies = [
     "duckdb>=1.1.0",
     "dbt-duckdb>=1.9.0",
     "dbt-core>=1.9.0",
-    # Pin mashumaro: dbt-adapters 1.23 caps it at <3.18, while versions <3.16
-    # don't support Python 3.14's typing changes (Optional resolution breaks
-    # JSONObjectSchema in mashumaro<3.16). Keep within [3.16, 3.18).
-    "mashumaro[msgpack]>=3.16,<3.18",
     "pandas>=2.2.0",
     "pyarrow>=17.0.0",
     "requests>=2.32.0",
