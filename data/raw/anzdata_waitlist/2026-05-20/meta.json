@@ -1,0 +1,36 @@
+{
+  "source": "anzdata_waitlist",
+  "snapshot_date": "2026-05-20",
+  "fetched_at": "2026-05-21T05:09:07Z",
+  "pipeline_version": "0.1.0",
+  "files": [
+    {
+      "name": "anzdata_ch6_2021.xlsx",
+      "url": "https://anzdata.syd1.digitaloceanspaces.com/assets/publications/c06_waiting-list_2021_ar_2022_v1.1_Final_2025-08-12-021806_vbzl.xlsx",
+      "sha256": "0edba5e4cb8bb8eb424f83915b5bdf9df95bb2f8aae29a17c16d7c891a95489a",
+      "bytes": 58619,
+      "row_count": null
+    },
+    {
+      "name": "anzdata_ch6_2022.xlsx",
+      "url": "https://anzdata.syd1.digitaloceanspaces.com/assets/publications/c06_waiting-list_2022_ar_2023_v0.2_20231109.xlsx",
+      "sha256": "7876adcf8bfecc2aee836cba645a7da6d107769b2eaa770946da5bf9f41d2ef8",
+      "bytes": 60000,
+      "row_count": null
+    },
+    {
+      "name": "anzdata_ch6_2023.xlsx",
+      "url": "https://anzdata.syd1.digitaloceanspaces.com/assets/publications/06_waiting-list_2023_ar_2024_F_20241224_2025-09-23-013855_qgdf.xlsx",
+      "sha256": "cdb916acf0b2999decc8f85bad94be0f3401336d6af7aa0d5436cf851801a8c5",
+      "bytes": 76993,
+      "row_count": null
+    },
+    {
+      "name": "anzdata_ch6_2024.xlsx",
+      "url": "https://anzdata.syd1.digitaloceanspaces.com/assets/publications/c06_waiting-list_2024_ar_2025_tables_F_20251205.xlsx",
+      "sha256": "8fe3cbdebcf211192f8cde92f36aa918759f400f83feb64a2b8263a732817682",
+      "bytes": 75373,
+      "row_count": null
+    }
+  ]
+}

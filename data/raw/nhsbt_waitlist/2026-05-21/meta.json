@@ -1,0 +1,155 @@
+{
+  "source": "nhsbt_waitlist",
+  "snapshot_date": "2026-05-21",
+  "fetched_at": "2026-05-21T06:41:06Z",
+  "pipeline_version": "0.1.0",
+  "files": [
+    {
+      "name": "activity-report-2002-2003.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/1294/uk_txa_2002-2003_complete.pdf",
+      "sha256": "a889cb14d498585cc8097d36778393a287f3fc3a8c4b890b76ed7d888ecb3df3",
+      "bytes": 2191643,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2005-2006.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/1289/transplant_activity_uk_2005-2006_v2.pdf",
+      "sha256": "d049cecb8fbba92fde8d1576f0db7516e11ef598b27a079915f4e671db0f41c9",
+      "bytes": 1191481,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2006-2007.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/1290/transplant_activity_uk_2006-2007.pdf",
+      "sha256": "1dd128b0aee32f1d736c56cdf798fedb8d2552c55d2dace05be7331814c089e5",
+      "bytes": 1438188,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2007-2008.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/1291/transplant_activity_uk_2007-2008.pdf",
+      "sha256": "0b98ff5f541e0485a6294df859fb18802795539e546cce6d71b49c50c22f8525",
+      "bytes": 1212092,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2008-2009.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/1292/transplant_activity_uk_2008-2009.pdf",
+      "sha256": "3ae0d48a858bd96f7c935a90c5270c5ef687d1cd9a9ffc85f5c72173c6aecb0b",
+      "bytes": 893856,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2009-2010.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/1282/activity_report_2009_10.pdf",
+      "sha256": "966d4660d067348fdd0a8d42b24637aa0d0dce3d7ecbec7a1a715a820298452a",
+      "bytes": 2447404,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2010-2011.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/1283/activity_report_2010_11.pdf",
+      "sha256": "e4b0ca9b4a3b21b1a5163362102285e699081669f6e1ef26812ce59a76ea434d",
+      "bytes": 1955673,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2011-2012.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/1284/activity_report_2011_12.pdf",
+      "sha256": "d5bfaa24026635cb18627cea3d72a560706a484347c36a77b8e7e88388e78c30",
+      "bytes": 3970675,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2012-2013.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/1285/activity_report_2012_13.pdf",
+      "sha256": "f868997263d07a6364a64e84e47bda5cbeda1d4280b0a7df5645909f2866a710",
+      "bytes": 3125876,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2013-2014.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/1286/activity_report_2013_14.pdf",
+      "sha256": "c34b2085633a272757b8ab5a3ea0d465fdc31e3850fb83425c33aaafb65a4bbc",
+      "bytes": 4950079,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2014-2015.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/4661/activity_report_2014_15.pdf",
+      "sha256": "4350473d23d2f8952a88cf1ccd41eb34296cbd90eb91014f288f7b8acdfd780c",
+      "bytes": 4641850,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2015-2016.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/4662/activity_report_2015_16.pdf",
+      "sha256": "94f946fe896acc4868325cf86af7e39dae7f802c233ab9f0529d979c121e4817",
+      "bytes": 6178074,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2016-2017.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/4657/activity_report_2016_17.pdf",
+      "sha256": "f7286672f81a47ef1d61bf315bf99b5f93e7fa002a231379b0b5e85638e0e295",
+      "bytes": 5139113,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2017-2018.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/12300/transplant-activity-report-2017-2018.pdf",
+      "sha256": "da0c25f5c2aebe4efd080b7f9b37a2fad3a1051bc5b68caed7a7946933147c82",
+      "bytes": 4473654,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2018-2019.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/16537/organ-donation-and-transplantation-activity-report-2018-2019.pdf",
+      "sha256": "b6c5ab55807c725ef9e1205417f9847e10c8a614b07f2c0034f99c8b6c1c6b96",
+      "bytes": 4592517,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2019-2020.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/19481/activity-report-2019-2020.pdf",
+      "sha256": "7ad7e5f452d63c6b1ade588fec41219df71bc3f67420b826cd50b7abebfa872b",
+      "bytes": 4481987,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2020-2021.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/24053/activity-report-2020-2021.pdf",
+      "sha256": "4d5a2251bbd9195a606fab697190c9636896a36ffc494161ef66c04500a36e77",
+      "bytes": 6413246,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2021-2022.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/27108/activity-report-2021-2022.pdf",
+      "sha256": "3e664026f915b957063f718cf04dcac102acccdb47ab23a4b0f2bbe44568f44e",
+      "bytes": 5942464,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2022-2023.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/30198/activity-report-2022-2023-final.pdf",
+      "sha256": "fb1a2e46f1c2e3e3b94d2f81187723546233f2c11aae6c6f2f255704a97e62f9",
+      "bytes": 8164081,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2023-2024.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/33778/activity-report-2023-2024.pdf",
+      "sha256": "5451ef30282dac049e5b40d55f4d4fe0bb2f2517e0130a137c6acb2ea4948ec8",
+      "bytes": 7084197,
+      "row_count": null
+    },
+    {
+      "name": "activity-report-2024-2025.pdf",
+      "url": "https://nhsbtdbe.blob.core.windows.net/umbraco-assets-corp/36795/activity-report-2024-2025-final.pdf",
+      "sha256": "4c8aea2a87925b6ecbad4df47e931b4695c99b493f78f4322cc13957724140ba",
+      "bytes": 6960053,
+      "row_count": null
+    }
+  ]
+}

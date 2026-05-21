@@ -1,0 +1,57 @@
+{
+  "source": "scandiatransplant_waitlist",
+  "snapshot_date": "2026-05-21",
+  "fetched_at": "2026-05-21T06:52:55Z",
+  "pipeline_version": "0.1.0",
+  "files": [
+    {
+      "name": "sctp_figures_2017_4Q.pdf",
+      "url": "https://www.scandiatransplant.org/data/sctp_figures_2017_4Q.pdf",
+      "sha256": "7ffea4582867054d97c10d866cbbb9cfd775e34a7d1d03d97a748d597850fefc",
+      "bytes": 199495,
+      "row_count": null
+    },
+    {
+      "name": "sctp_figures_2018_4Q.pdf",
+      "url": "https://www.scandiatransplant.org/data/sctp_figures_2018_4Q.pdf",
+      "sha256": "3e63282377ae5851c1ce7271c504abe90d84558ad4b7d5df9d107ae041d3ff00",
+      "bytes": 477719,
+      "row_count": null
+    },
+    {
+      "name": "sctp_figures_2019_4Q.pdf",
+      "url": "https://www.scandiatransplant.org/data/sctp_figures_2019_4Q.pdf",
+      "sha256": "92293a52790082b3f07b97ac87ba8a09371a95367f444616c76f83f4246e7951",
+      "bytes": 624398,
+      "row_count": null
+    },
+    {
+      "name": "sctp_figures_2020_4Q.pdf",
+      "url": "https://www.scandiatransplant.org/data/sctp_figures_2020_4Q.pdf",
+      "sha256": "753ea993377da3a523643bb4cd5d5da5ac2241ac7d07fd4fefb68772bbb748ff",
+      "bytes": 227072,
+      "row_count": null
+    },
+    {
+      "name": "sctp_figures_2021_4Q.pdf",
+      "url": "https://www.scandiatransplant.org/data/sctp_figures_2021_4Q.pdf",
+      "sha256": "284fd2692ca3712b9a9f0d94930ee272d6207a35df4c46c298918bb8fdad439f",
+      "bytes": 227998,
+      "row_count": null
+    },
+    {
+      "name": "sctp_figures_2022_4Q.pdf",
+      "url": "https://www.scandiatransplant.org/data/sctp_figures_2022_4Q.pdf",
+      "sha256": "d73da8f8cb1786558f37c608cb0274cb2dc862991a464df5b86ec81570f02442",
+      "bytes": 373905,
+      "row_count": null
+    },
+    {
+      "name": "sctp_figures_2023_4Q.pdf",
+      "url": "https://www.scandiatransplant.org/data/sctp_figures_2023_4Q.pdf",
+      "sha256": "d08422af9948f8f952020746a7539bd07734f1793efe774c0a0641c1860bb266",
+      "bytes": 229005,
+      "row_count": null
+    }
+  ]
+}

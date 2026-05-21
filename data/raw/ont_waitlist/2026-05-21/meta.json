@@ -1,0 +1,36 @@
+{
+  "source": "ont_waitlist",
+  "snapshot_date": "2026-05-21",
+  "fetched_at": "2026-05-21T06:51:39Z",
+  "pipeline_version": "0.1.0",
+  "files": [
+    {
+      "name": "ont-kidney-2024.pdf",
+      "url": "https://www.ont.es/wp-content/uploads/2025/03/ACTIVIDAD-DE-DONACION-Y-TRASPLANTE-RENAL-ESPANA-2024.pdf",
+      "sha256": "5f139ccc041102cf13fd5a06d57e767d3cba6632c99aa5b11338de56e2e3c5aa",
+      "bytes": 3763269,
+      "row_count": null
+    },
+    {
+      "name": "ont-heart-2024.pdf",
+      "url": "https://www.ont.es/wp-content/uploads/2025/02/ACTIVIDAD-DE-DONACION-Y-TRASPLANTE-CARDIACO-2024.pdf",
+      "sha256": "01855af89d6b175f6cadc23ac561855e5e5eb95c47ef0874a84b594c2410bc3f",
+      "bytes": 3944609,
+      "row_count": null
+    },
+    {
+      "name": "ont-liver-2024.pdf",
+      "url": "https://www.ont.es/wp-content/uploads/2025/03/ACTIVIDAD-DE-DONACION-Y-TRASPLANTE-HEPATICO-ESPANA-2024.pdf",
+      "sha256": "c2db46c834efa97da0a9711ef59f64475c17fce569d625ccbcb773b40d99343d",
+      "bytes": 3411095,
+      "row_count": null
+    },
+    {
+      "name": "ont-lung-2024.pdf",
+      "url": "https://www.ont.es/wp-content/uploads/2025/03/ACTIVIDAD-DE-DONACION-Y-TRASPLANTE-PULMONAR-ESPANA-2024.pdf",
+      "sha256": "e0efdf68cbdf55cd531858eaebd9535a98a1fed42cc016fff5f8e511c66ec555",
+      "bytes": 3321576,
+      "row_count": null
+    }
+  ]
+}
