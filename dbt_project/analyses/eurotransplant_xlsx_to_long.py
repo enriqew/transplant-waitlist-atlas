@@ -70,7 +70,14 @@ def _latest_snapshot_dir() -> Path:
     candidates = sorted(p for p in RAW_ROOT.iterdir() if p.is_dir())
     if not candidates:
         raise SystemExit(f"no dated subdirectories under {RAW_ROOT}")
-    return candidates[-1]
+    # Walk newest-first; return first dir that has the required XLSX.
+    for candidate in reversed(candidates):
+        if (candidate / ACTIVE_WAITLIST_FILE).exists():
+            return candidate
+    raise SystemExit(
+        f"active waitlist XLSX not found under any snapshot in {RAW_ROOT}; "
+        "run `python -m ingest.eurotransplant_waitlist --force` to re-download"
+    )
 
 
 def _parse_active_waitlist(xlsx_path: Path, writer: csv.writer) -> int:

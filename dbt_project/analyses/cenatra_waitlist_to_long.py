@@ -118,7 +118,15 @@ def _latest_snapshot_dir() -> Path:
     candidates = sorted(p for p in RAW_ROOT.iterdir() if p.is_dir())
     if not candidates:
         raise SystemExit(f"no dated subdirectories under {RAW_ROOT}")
-    return candidates[-1]
+    # Walk newest-first; return first dir that has at least one quarterly CSV.
+    for candidate in reversed(candidates):
+        csvs = [p for p in candidate.glob("*.csv") if not p.name.endswith("_long.csv")]
+        if csvs:
+            return candidate
+    raise SystemExit(
+        f"no CENATRA quarterly CSVs found under any snapshot in {RAW_ROOT}; "
+        "run `python -m ingest.cenatra_waitlist --force` to re-download"
+    )
 
 
 def _period_from_filename(name: str) -> tuple[int, int] | None:

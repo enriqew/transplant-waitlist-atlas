@@ -87,7 +87,15 @@ def _latest_snapshot_dir() -> Path:
     candidates = sorted(p for p in RAW_ROOT.iterdir() if p.is_dir())
     if not candidates:
         raise SystemExit(f"no dated subdirectories under {RAW_ROOT}")
-    return candidates[-1]
+    # Walk newest-first; return first dir that has all three required CSVs.
+    for candidate in reversed(candidates):
+        if all((candidate / f).exists() for f in (SNAPSHOT_FILE, ADDITIONS_FILE, REMOVALS_FILE)):
+            return candidate
+    raise SystemExit(
+        f"OPTN raw CSVs not found under any snapshot in {RAW_ROOT}; "
+        "download from https://optn.transplant.hrsa.gov/data/view-data-reports/build-advanced/ "
+        "and run `python -m ingest.optn_waitlist` to register them"
+    )
 
 
 def _validate_organ_columns(header_organs: list[str], context: str) -> list[str]:
