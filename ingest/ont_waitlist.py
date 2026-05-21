@@ -15,20 +15,24 @@ Usage:
 
 from __future__ import annotations
 
-import argparse
-import json
 import sys
 from pathlib import Path
 
-# Repository-level imports
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from ingest._common import (  # noqa: E402
-    make_snapshot_dir,
-    stream_download,
-    sha256_file,
+from ingest._common import (
+    FileRecord,
+    SnapshotComplete,
+    SnapshotMeta,
+    build_argparser,
+    configure_logging,
+    ensure_snapshot_dir,
+    pipeline_version,
+    sha256_of,
+    stream_to_file,
+    utcnow_iso,
     write_meta,
 )
 
+_SOURCE = "ont_waitlist"
 _ONT_BASE = "https://www.ont.es/wp-content/uploads"
 
 # Per-organ filename candidates (tried in order). {year} is the data year.
@@ -58,101 +62,101 @@ _FILENAME_PATTERNS: dict[str, list[str]] = {
 _UPLOAD_MONTHS = ["01", "02", "03", "04", "05", "06"]
 
 
-def _try_download(data_year: int, organ: str, dest: Path, dry_run: bool) -> str | None:
+def _try_download(data_year: int, organ: str, dest: Path, log) -> str | None:
     """Try all URL candidates for one organ/year. Returns downloaded URL or None."""
     upload_year = data_year + 1
     patterns = _FILENAME_PATTERNS[organ]
-    import urllib.request
 
     for month in _UPLOAD_MONTHS:
         for pattern in patterns:
             filename = pattern.format(year=data_year)
             url = f"{_ONT_BASE}/{upload_year}/{month}/{filename}"
-            if dry_run:
-                print(f"  DRY-RUN would try: {url}")
-                continue
             try:
-                with urllib.request.urlopen(url, timeout=10) as resp:
-                    if resp.status == 200:
-                        stream_download(url, dest)
-                        return url
+                stream_to_file(url, dest)
+                return url
             except Exception:
+                if dest.exists():
+                    dest.unlink(missing_ok=True)
                 continue
     return None
 
 
-def ingest(
-    snapshot_date: str,
-    force: bool = False,
-    dry_run: bool = False,
-) -> None:
-    raw_root = Path(__file__).resolve().parents[1] / "data" / "raw" / "ont_waitlist"
-    snap_dir = make_snapshot_dir(raw_root, snapshot_date, force=force)
-    meta_path = snap_dir / "meta.json"
+def ingest(snapshot_date: str, force: bool = False, dry_run: bool = False) -> None:
+    log = configure_logging(_SOURCE)
 
-    if meta_path.exists() and not force:
-        print(f"snapshot already complete: {snap_dir} (use --force to re-download)")
+    if dry_run:
+        snap_year = int(snapshot_date[:4])
+        data_year = snap_year - 2
+        for organ in _FILENAME_PATTERNS:
+            upload_year = data_year + 1
+            for month in _UPLOAD_MONTHS:
+                for pattern in _FILENAME_PATTERNS[organ]:
+                    url = f"{_ONT_BASE}/{upload_year}/{month}/{pattern.format(year=data_year)}"
+                    log.info("DRY-RUN would try: %s", url)
         return
 
-    # Infer data year from snapshot date (e.g. 2026-05-20 → latest available = 2024)
+    try:
+        snap_dir = ensure_snapshot_dir(_SOURCE, snapshot_date, force)
+    except SnapshotComplete:
+        log.info("snapshot already complete for %s (use --force to re-download)", snapshot_date)
+        return
+
     snap_year = int(snapshot_date[:4])
     data_year = snap_year - 2  # ONT publishes Y data in Q1 of Y+1; by May Y+2 use Y
 
-    downloaded: dict[str, str] = {}  # organ → url
+    fetched_at = utcnow_iso()
+    file_records: list[FileRecord] = []
     failed: list[str] = []
 
     for organ in _FILENAME_PATTERNS:
         dest = snap_dir / f"ont-{organ}-{data_year}.pdf"
         if dest.exists() and not force:
-            print(f"  {dest.name}: already present, skip")
-            downloaded[organ] = "(pre-existing)"
+            log.info("%s: already present, skipping", dest.name)
+            file_records.append(FileRecord(
+                name=dest.name,
+                url="(pre-existing)",
+                sha256=sha256_of(dest),
+                bytes=dest.stat().st_size,
+            ))
             continue
-        print(f"  {organ}: searching for {data_year} report...")
-        url = _try_download(data_year, organ, dest, dry_run)
+
+        log.info("%s: searching for %d report...", organ, data_year)
+        url = _try_download(data_year, organ, dest, log)
         if url:
-            print(f"  {organ}: downloaded from {url}")
-            downloaded[organ] = url
+            log.info("%s: downloaded from %s", organ, url)
+            file_records.append(FileRecord(
+                name=dest.name,
+                url=url,
+                sha256=sha256_of(dest),
+                bytes=dest.stat().st_size,
+            ))
         else:
-            msg = (
-                f"  {organ}: FAILED — could not find PDF at any candidate URL.\n"
-                f"    Tried upload months {_UPLOAD_MONTHS} of {data_year + 1}.\n"
-                f"    Manually download from https://www.ont.es/ and place as:\n"
-                f"    {dest}"
+            log.error(
+                "%s: FAILED — could not find PDF at any candidate URL. "
+                "Tried upload months %s of %d. "
+                "Manually download from https://www.ont.es/ and place as: %s",
+                organ, _UPLOAD_MONTHS, data_year + 1, dest,
             )
-            print(msg, file=sys.stderr)
             failed.append(organ)
 
-    if dry_run:
-        print("DRY-RUN complete, no files written")
-        return
-
-    if not downloaded and failed:
+    if not file_records and failed:
         raise SystemExit("all ONT organs failed — cannot create snapshot")
 
-    shas = {organ: sha256_file(snap_dir / f"ont-{organ}-{data_year}.pdf")
-            for organ in downloaded if (snap_dir / f"ont-{organ}-{data_year}.pdf").exists()}
-
-    meta = {
-        "source": "ONT",
-        "data_year": data_year,
-        "snapshot_date": snapshot_date,
-        "organs_downloaded": list(downloaded.keys()),
-        "organs_failed": failed,
-        "urls": downloaded,
-        "sha256": shas,
-    }
-    write_meta(snap_dir, meta)
-    print(f"snapshot written: {snap_dir} ({len(downloaded)} organ(s), {len(failed)} failed)")
+    write_meta(snap_dir, SnapshotMeta(
+        source=_SOURCE,
+        snapshot_date=snapshot_date,
+        fetched_at=fetched_at,
+        pipeline_version=pipeline_version(),
+        files=file_records,
+    ))
+    log.info("snapshot written: %s (%d organ(s), %d failed)", snap_dir, len(file_records), len(failed))
 
     if failed:
         raise SystemExit(f"partial ONT snapshot: {len(failed)} organ(s) missing: {failed}")
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Ingest ONT España organ activity PDFs")
-    parser.add_argument("--snapshot-date", required=True, help="YYYY-MM-DD")
-    parser.add_argument("--force", action="store_true", help="Overwrite existing snapshot")
-    parser.add_argument("--dry-run", action="store_true", help="Print URLs without downloading")
+    parser = build_argparser(_SOURCE)
     args = parser.parse_args()
     ingest(args.snapshot_date, force=args.force, dry_run=args.dry_run)
 
