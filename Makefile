@@ -24,7 +24,7 @@ install:
 ingest:
 	$(PYTHON) -m ingest.cenatra_waitlist           --snapshot-date $(SNAPSHOT_DATE)
 	$(PYTHON) -m ingest.eurotransplant_waitlist    --snapshot-date $(SNAPSHOT_DATE)
-	$(PYTHON) -m ingest.optn_waitlist              --snapshot-date $(SNAPSHOT_DATE)
+	-$(PYTHON) -m ingest.optn_waitlist             --snapshot-date $(SNAPSHOT_DATE)
 	$(PYTHON) -m ingest.nhsbt_waitlist             --snapshot-date $(SNAPSHOT_DATE)
 	$(PYTHON) -m ingest.ont_waitlist               --snapshot-date $(SNAPSHOT_DATE)
 	$(PYTHON) -m ingest.scandiatransplant_waitlist --snapshot-date $(SNAPSHOT_DATE)
