@@ -117,10 +117,18 @@ def sha256_of(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _ssl_verify() -> bool:
+    """Return False when TRANSPLANT_WAITLIST_SSL_VERIFY=0 (for environments with
+    broken system certificate stores). Any other value (or unset) means verify."""
+    return os.environ.get("TRANSPLANT_WAITLIST_SSL_VERIFY", "1") not in ("0", "false", "no")
+
+
 def http_get(url: str, *, timeout: int = HTTP_TIMEOUT_SECONDS) -> requests.Response:
     """GET with our UA, no retries (failures must surface)."""
 
-    response = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=timeout)
+    response = requests.get(
+        url, headers={"User-Agent": USER_AGENT}, timeout=timeout, verify=_ssl_verify()
+    )
     response.raise_for_status()
     return response
 
@@ -135,7 +143,8 @@ def stream_to_file(
     """Stream a GET response into `dest`. Returns bytes written.
 
     `verify` is forwarded to requests. Pass a path to a custom CA bundle for sources
-    whose servers don't include their intermediate certs.
+    whose servers don't include their intermediate certs. When omitted, falls back to
+    the TRANSPLANT_WAITLIST_SSL_VERIFY env-var (default: verify).
     """
 
     bytes_written = 0
@@ -144,7 +153,7 @@ def stream_to_file(
         headers={"User-Agent": USER_AGENT},
         timeout=timeout,
         stream=True,
-        verify=True if verify is None else verify,
+        verify=_ssl_verify() if verify is None else verify,
     ) as response:
         response.raise_for_status()
         with dest.open("wb") as fh:
