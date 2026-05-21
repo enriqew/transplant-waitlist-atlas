@@ -66,6 +66,15 @@ scandiatransplant_stock AS (
     FROM {{ ref('stg_scandiatransplant_waitlist') }}
     WHERE metric_type = 'stock'
     GROUP BY 1, 2, 3, 5
+),
+
+anzdata_stock AS (
+    -- Australian kidney waitlist; active patients at 31 December.
+    -- Source: ANZDATA Chapter 6 Excel files (annual report rolling windows).
+    SELECT country_iso3, year, organ, SUM(patients) AS patients, source
+    FROM {{ ref('stg_anzdata_waitlist') }}
+    WHERE metric_type = 'stock'
+    GROUP BY 1, 2, 3, 5
 )
 
 SELECT country_iso3, year, organ, patients, source FROM optn_stock
@@ -79,3 +88,5 @@ UNION ALL
 SELECT country_iso3, year, organ, patients, source FROM ont_stock
 UNION ALL
 SELECT country_iso3, year, organ, patients, source FROM scandiatransplant_stock
+UNION ALL
+SELECT country_iso3, year, organ, patients, source FROM anzdata_stock

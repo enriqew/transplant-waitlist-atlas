@@ -28,6 +28,7 @@ ingest:
 	$(PYTHON) -m ingest.nhsbt_waitlist             --snapshot-date $(SNAPSHOT_DATE)
 	$(PYTHON) -m ingest.ont_waitlist               --snapshot-date $(SNAPSHOT_DATE)
 	$(PYTHON) -m ingest.scandiatransplant_waitlist --snapshot-date $(SNAPSHOT_DATE)
+	$(PYTHON) -m ingest.anzdata_waitlist           --snapshot-date $(SNAPSHOT_DATE)
 
 build: prebuild
 	cd $(DBT_DIR) && dbt deps && dbt seed && dbt run
@@ -41,6 +42,7 @@ prebuild:
 	$(PYTHON) $(DBT_DIR)/analyses/nhsbt_pdf_to_long.py
 	$(PYTHON) $(DBT_DIR)/analyses/ont_pdf_to_long.py
 	$(PYTHON) $(DBT_DIR)/analyses/scandiatransplant_pdf_to_long.py
+	$(PYTHON) $(DBT_DIR)/analyses/anzdata_xlsx_to_long.py
 
 test:
 	cd $(DBT_DIR) && dbt test
