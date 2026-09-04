@@ -4,7 +4,7 @@ Offline data pipeline that ingests organ-transplant **waiting list** statistics 
 
 Companion project to [`transplant-atlas`](https://github.com/enriqew/transplant-atlas), which covers donation and transplantation rates. Where the atlas answers *"who is doing transplants?"*, this project answers *"who is waiting for one?"*.
 
-The output is consumed by [enriqueredonda.dev](https://github.com/enriqew/data-dive-design-hub) at the `/projects/transplant-waitlist-atlas` route, but every artifact is plain JSON and can be reused by any client.
+The output is consumed by the [live dashboard](https://eredonda.com/projects/transplant-waitlist-atlas?utm_source=github&utm_medium=referral) on eredonda.com, but every artifact is plain JSON and can be reused by any client.
 
 ## Why this is hard
 
@@ -36,19 +36,18 @@ Same medallion (bronze / silver / gold) shape as [`transplant-atlas`](https://gi
 
 ```
 ingest/                            # bronze — Python fetchers per source
-  cenatra_waitlist.py
-  optn_waitlist.py
-  nhsbt_waitlist.py                # planned
-  eurotransplant_waitlist.py       # planned
-  ont_waitlist.py                  # planned
-  ...
+  cenatra_waitlist.py              # México (CKAN, quarterly)
+  optn_waitlist.py                 # US (OPTN/UNOS)
+  nhsbt_waitlist.py                # UK
+  ont_waitlist.py                  # España
+  eurotransplant_waitlist.py       # Eurotransplant member states
+  scandiatransplant_waitlist.py    # Nordic and Baltic countries
+  anzdata_waitlist.py              # Australia and New Zealand
   _common.py                       # shared helpers (snapshot dirs, SHA256, meta.json)
 
 dbt_project/                       # silver + gold — normalization and marts
   models/staging/                  # one stg_<source>.sql per ingest
-  models/marts/                    # fct_waitlist_country_year_organ.sql, etc.
-  seeds/                           # country/organ/state code lookups
-  tests/                           # not_null, unique, relationships
+  models/marts/                    # three facts + schema.yml with dbt tests
 
 export/                            # final JSON artifacts
   build_artifacts.py
@@ -57,8 +56,6 @@ data/
   raw/{source}/{YYYY-MM-DD}/       # bronze snapshots (gitignored, meta.json committed)
   duckdb/                          # DuckDB working file (gitignored)
   exports/                         # final JSON for the portfolio (committed)
-
-schemas/                           # JSON Schema for each export artifact
 ```
 
 ### Bronze
@@ -85,21 +82,23 @@ Country and organ names are mapped to canonical codes (`ISO 3166-1 alpha-3`, int
 
 ### Gold
 
-Two marts feed the portfolio:
+Three marts feed the portfolio:
 
-- **`fct_waitlist_country_year_organ`** — one row per `(country, year, organ)`. The world view.
-- **`fct_waitlist_mx_state_year_organ`** — Mexico drill-down (CENATRA-only). Per state × organ.
+- **`fct_waitlist_country_year_organ`**: one row per `(country, year, organ)`. The world view.
+- **`fct_waitlist_mx_state_quarter_organ`**: Mexico drill-down (CENATRA only), per state, quarter and organ.
+- **`fct_waitlist_removals`**: US removals by year, organ and reason. The fate distribution.
 
 PMP rates (`patients_waiting_pmp`) require the population data already in `transplant-atlas`. To keep this repo self-contained, the relevant slices of World Bank / CONAPO are re-ingested here.
 
 ### Export
 
-A single Python script queries gold, validates each output against a JSON Schema (draft 2020-12), asserts size limits, and writes:
+A single Python script queries gold, asserts a hard gzipped size cap per artifact (CloudFront serves gzipped, so that is the real wire size), and writes:
 
 - `world-waitlist.json` — country × year × organ.
 - `mexico-waitlist.json` — state × year × organ.
 - `definitions.json` — per-source definition string for the *"what does waitlist mean here?"* tooltip.
-- `meta.json` — provenance.
+- `us-fate-distribution.json`: US removals by year, organ and reason.
+- `meta.json`: provenance.
 
 These four files are the only output the portfolio consumes.
 
@@ -122,20 +121,39 @@ python -m ingest.cenatra_waitlist --snapshot-date 2026-05-19
 python -m ingest.optn_waitlist    --snapshot-date 2026-05-19 --dry-run
 ```
 
+## Known gap: the committed export is incomplete
+
+The artifacts currently in `data/exports/` do not reflect what the pipeline can
+produce. `us-fate-distribution.json` is empty and `world-waitlist.json` has no
+US rows, because the OPTN snapshot at `data/raw/optn_waitlist/2026-05-19/` was
+re-derived after its source files were gone: `optn_long.csv` is a header and
+nothing else, while its own `meta.json` records the 9,431 removal rows that were
+originally ingested.
+
+OPTN acquisition is a manual operator step. The three CSVs come from the
+[Build Advanced](https://optn.transplant.hrsa.gov/data/view-data-reports/build-advanced/)
+UI and cannot be fetched unattended, which is why the gap is not self-healing.
+To close it: re-download the three files named in that `meta.json`, place them
+in the snapshot directory, and run `make all`.
+
+The portfolio currently renders an earlier, complete export, so the published
+dashboard is correct. It is this repository's copy that regressed.
+
 ## Roadmap
 
 - [x] Repo scaffolding, shared bronze helpers, common Makefile
-- [ ] CENATRA waitlist (México, CSV via CKAN — quarterly snapshots) — **in progress**
-- [ ] OPTN/UNOS waitlist (US, public summary CSV)
-- [ ] Silver staging for the two sources above
-- [ ] Gold mart `fct_waitlist_country_year_organ`
-- [ ] First export artifact + portfolio integration
-- [ ] NHS BT (UK, PDF parsing)
-- [ ] ONT (España, PDF parsing)
-- [ ] Eurotransplant (PDF parsing, 8 countries)
-- [ ] Scandiatransplant
-- [ ] ANZDATA
-- [ ] Optional: PMP rates against World Bank population
+- [x] CENATRA waitlist (México, CSV via CKAN, quarterly snapshots)
+- [x] OPTN/UNOS waitlist and removals (US)
+- [x] Silver staging per source
+- [x] Gold marts and first export artifacts, wired into the portfolio
+- [x] NHS BT (UK)
+- [x] ONT (España)
+- [x] Eurotransplant
+- [x] Scandiatransplant
+- [x] ANZDATA
+- [ ] JSON Schema validation of each artifact (the `jsonschema` dependency is
+      declared but the export only enforces size caps today)
+- [ ] PMP rates against World Bank population
 
 ## License
 
@@ -143,4 +161,19 @@ MIT. See [LICENSE](LICENSE).
 
 ## Data attribution
 
-Each source has its own attribution requirements; see `meta.json` for the URL of every snapshot. Use of the redistributed data must respect the original registries' terms.
+Every snapshot records its source URL and SHA256 in `meta.json`. Redistribution
+of the aggregates must respect each registry's own terms.
+
+**OPTN/UNOS.** HRSA requires the following acknowledgment, reproduced verbatim:
+
+> *This work was supported in part by Health Resources and Services Administration contract HHSH250-2019-00001C. The content is the responsibility of the authors alone and does not necessarily reflect the views or policies of the Department of Health and Human Services, nor does mention of trade names, commercial products, or organizations imply endorsement by the U.S. Government.*
+
+The contract number is the one current for this dataset's snapshot. If the
+pipeline is refreshed against a newer OPTN contract period, check HRSA's
+[citing data](https://www.hrsa.gov/optn/data/view-data-reports/citing-data) page
+and update it.
+
+**Other registries.** CENATRA (Mexico) publishes under Libre Uso MX, open reuse
+with attribution. ONT (Spain), Eurotransplant and Scandiatransplant publish no
+explicit reuse terms, so their figures are treated as cited aggregates pending
+clarification.
