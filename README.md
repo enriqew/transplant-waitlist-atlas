@@ -28,14 +28,14 @@ Realistic country coverage: **15–25 countries**, biased toward Europe, North A
 - **"Active waitlist"** (US OPTN) ≠ **"Registered patients"** (UK NHS BT) ≠ **"Lista activa"** (España ONT).
 - Some registries exclude temporarily inactive candidates; others include them.
 - Some report year-end snapshots; others report monthly averages or peak.
-- Comparing 1:1 is **fundamentally limited** — the project's job is to make those caveats first-class, not paper over them.
+- Comparing 1:1 is **fundamentally limited**: the project's job is to make those caveats first-class, not paper over them.
 
 ## Architecture
 
 Same medallion (bronze / silver / gold) shape as [`transplant-atlas`](https://github.com/enriqew/transplant-atlas), with DuckDB as the analytical engine and `dbt-duckdb` for SQL-first transformations.
 
 ```
-ingest/                            # bronze — Python fetchers per source
+ingest/                            # bronze, Python fetchers per source
   cenatra_waitlist.py              # México (CKAN, quarterly)
   optn_waitlist.py                 # US (OPTN/UNOS)
   nhsbt_waitlist.py                # UK
@@ -45,7 +45,7 @@ ingest/                            # bronze — Python fetchers per source
   anzdata_waitlist.py              # Australia and New Zealand
   _common.py                       # shared helpers (snapshot dirs, SHA256, meta.json)
 
-dbt_project/                       # silver + gold — normalization and marts
+dbt_project/                       # silver + gold, normalization and marts
   models/staging/                  # one stg_<source>.sql per ingest
   models/marts/                    # three facts + schema.yml with dbt tests
 
@@ -65,7 +65,7 @@ Each `ingest/<source>.py` is a self-contained Python module that:
 1. Downloads raw bytes to `data/raw/<source>/<YYYY-MM-DD>/`.
 2. Computes SHA256 + byte count + row count of each file.
 3. Writes a `meta.json` sidecar with full provenance (`url`, `fetched_at`, `pipeline_version`, etc.).
-4. Exits non-zero on any failure — silent partial runs are unacceptable.
+4. Exits non-zero on any failure, silent partial runs are unacceptable.
 
 Snapshots are immutable. To refresh, re-run with a new `--snapshot-date`.
 
@@ -94,9 +94,9 @@ PMP rates (`patients_waiting_pmp`) require the population data already in `trans
 
 A single Python script queries gold, asserts a hard gzipped size cap per artifact (CloudFront serves gzipped, so that is the real wire size), and writes:
 
-- `world-waitlist.json` — country × year × organ.
-- `mexico-waitlist.json` — state × year × organ.
-- `definitions.json` — per-source definition string for the *"what does waitlist mean here?"* tooltip.
+- `world-waitlist.json`: country × year × organ.
+- `mexico-waitlist.json`: state × year × organ.
+- `definitions.json`: per-source definition string for the *"what does waitlist mean here?"* tooltip.
 - `us-fate-distribution.json`: US removals by year, organ and reason.
 - `meta.json`: provenance.
 
