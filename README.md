@@ -121,23 +121,30 @@ python -m ingest.cenatra_waitlist --snapshot-date 2026-05-19
 python -m ingest.optn_waitlist    --snapshot-date 2026-05-19 --dry-run
 ```
 
-## Known gap: the committed export is incomplete
+## The OPTN snapshot is manual, and that has bitten once
 
-The artifacts currently in `data/exports/` do not reflect what the pipeline can
-produce. `us-fate-distribution.json` is empty and `world-waitlist.json` has no
-US rows, because the OPTN snapshot at `data/raw/optn_waitlist/2026-05-19/` was
-re-derived after its source files were gone: `optn_long.csv` is a header and
-nothing else, while its own `meta.json` records the 9,431 removal rows that were
-originally ingested.
-
-OPTN acquisition is a manual operator step. The three CSVs come from the
+OPTN bronze cannot be fetched unattended. The three CSVs come from the
 [Build Advanced](https://optn.transplant.hrsa.gov/data/view-data-reports/build-advanced/)
-UI and cannot be fetched unattended, which is why the gap is not self-healing.
-To close it: re-download the three files named in that `meta.json`, place them
-in the snapshot directory, and run `make all`.
+UI, an interactive form, and an operator drops them into the snapshot directory.
+On 2026-05-21 the long-form CSV was re-derived after those source files were
+gone, so the run produced nothing for the United States: `us-fate-distribution.json`
+was written as `[]` and `world-waitlist.json` lost its US rows. Both were
+committed and published in that state.
 
-The portfolio currently renders an earlier, complete export, so the published
-dashboard is correct. It is this repository's copy that regressed.
+Two things changed as a result.
+
+The export now refuses to write when a bronze snapshot on disk declares rows
+that do not reach the artifacts. It names the snapshot and the row count it
+expected, and it checks before writing anything, so a partial run cannot leave
+half the artifacts refreshed and the other half emptied. See
+`tests/test_export_guard.py`.
+
+The artifacts themselves were restored from this pipeline's own earlier output
+rather than re-derived, because the bronze that produced them no longer exists.
+`data/exports/meta.json` carries a `provenance_note` saying so: every source
+except OPTN is from the 2026-05-21 run, the OPTN-derived rows are older. To
+return the export to a single coherent run, re-download the three CSVs named in
+`data/raw/optn_waitlist/2026-05-19/meta.json` and run `make all`.
 
 ## Roadmap
 

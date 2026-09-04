@@ -1,1 +1,87 @@
-{"generated_at":"2026-05-21T07:00:06Z","pipeline_version":"0.1.0","sources":[{"name":"anzdata_waitlist","snapshot_date":"2026-05-21","data_as_of":null,"files":4,"bytes":270985,"rows_ingested":null},{"name":"cenatra_waitlist__establecimientos_activos_programas","snapshot_date":"2026-05-21","data_as_of":null,"files":22,"bytes":1713636,"rows_ingested":12494},{"name":"cenatra_waitlist__pacientes_espera_organo_tejido","snapshot_date":"2026-05-21","data_as_of":null,"files":22,"bytes":88476932,"rows_ingested":459905},{"name":"eurotransplant_waitlist","snapshot_date":"2026-05-21","data_as_of":null,"files":12,"bytes":95705,"rows_ingested":null},{"name":"nhsbt_waitlist","snapshot_date":"2026-05-21","data_as_of":null,"files":21,"bytes":87448203,"rows_ingested":null},{"name":"ont_waitlist","snapshot_date":"2026-05-21","data_as_of":null,"files":4,"bytes":14440549,"rows_ingested":null},{"name":"optn_waitlist","snapshot_date":"2026-05-19","data_as_of":"2026-05-18","files":3,"bytes":693750,"rows_ingested":10480},{"name":"scandiatransplant_waitlist","snapshot_date":"2026-05-21","data_as_of":null,"files":7,"bytes":2359592,"rows_ingested":null}],"artifact_row_counts":{"world_waitlist":549,"mexico_waitlist":3095,"us_fate_distribution":0},"coverage":{"countries_world":17,"world_years":[2014,2025],"removals_years":[null,null]}}
+{
+  "generated_at": "2026-05-21T07:00:06Z",
+  "pipeline_version": "0.1.0",
+  "sources": [
+    {
+      "name": "anzdata_waitlist",
+      "snapshot_date": "2026-05-21",
+      "data_as_of": null,
+      "files": 4,
+      "bytes": 270985,
+      "rows_ingested": null
+    },
+    {
+      "name": "cenatra_waitlist__establecimientos_activos_programas",
+      "snapshot_date": "2026-05-21",
+      "data_as_of": null,
+      "files": 22,
+      "bytes": 1713636,
+      "rows_ingested": 12494
+    },
+    {
+      "name": "cenatra_waitlist__pacientes_espera_organo_tejido",
+      "snapshot_date": "2026-05-21",
+      "data_as_of": null,
+      "files": 22,
+      "bytes": 88476932,
+      "rows_ingested": 459905
+    },
+    {
+      "name": "eurotransplant_waitlist",
+      "snapshot_date": "2026-05-21",
+      "data_as_of": null,
+      "files": 12,
+      "bytes": 95705,
+      "rows_ingested": null
+    },
+    {
+      "name": "nhsbt_waitlist",
+      "snapshot_date": "2026-05-21",
+      "data_as_of": null,
+      "files": 21,
+      "bytes": 87448203,
+      "rows_ingested": null
+    },
+    {
+      "name": "ont_waitlist",
+      "snapshot_date": "2026-05-21",
+      "data_as_of": null,
+      "files": 4,
+      "bytes": 14440549,
+      "rows_ingested": null
+    },
+    {
+      "name": "optn_waitlist",
+      "snapshot_date": "2026-05-19",
+      "data_as_of": "2026-05-18",
+      "files": 3,
+      "bytes": 693750,
+      "rows_ingested": 10480
+    },
+    {
+      "name": "scandiatransplant_waitlist",
+      "snapshot_date": "2026-05-21",
+      "data_as_of": null,
+      "files": 7,
+      "bytes": 2359592,
+      "rows_ingested": null
+    }
+  ],
+  "artifact_row_counts": {
+    "world_waitlist": 778,
+    "mexico_waitlist": 3095,
+    "us_fate_distribution": 1459
+  },
+  "coverage": {
+    "countries_world": 18,
+    "world_years": [
+      1995,
+      2026
+    ],
+    "removals_years": [
+      1995,
+      2026
+    ]
+  },
+  "provenance_note": "Mixed provenance. Every source except OPTN comes from the 2026-05-21 run. The OPTN-derived rows in world-waitlist.json and the whole of us-fate-distribution.json were restored from the last run that had a complete OPTN bronze snapshot: the 2026-05-21 rebuild re-derived optn_long.csv after the manually downloaded source CSVs were gone, so it produced nothing for the United States. The restored figures are this pipeline's own earlier output, not a re-derivation. Re-download the three CSVs named in data/raw/optn_waitlist/2026-05-19/meta.json and re-run `make all` to return the export to a single coherent run."
+}

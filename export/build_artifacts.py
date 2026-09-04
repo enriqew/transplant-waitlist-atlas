@@ -297,6 +297,51 @@ def _build_meta(con: duckdb.DuckDBPyConnection) -> dict:
     }
 
 
+def _assert_sources_contributed(
+    *, world: list[dict], fate: list[dict], log: logging.Logger
+) -> None:
+    """Fail the export when a bronze source that is on disk contributed nothing.
+
+    A snapshot directory whose meta.json declares row counts, but whose rows are
+    absent from the artifacts, means the run is broken rather than empty: it is
+    what happens when the derived long-form CSV is rebuilt after its manually
+    downloaded source files are gone. Writing `[]` in that situation is worse
+    than failing, because the empty artifact gets committed and published as if
+    it were a finding.
+    """
+
+    problems: list[str] = []
+
+    optn_snapshots = sorted(RAW_ROOT.glob("optn_waitlist/*/meta.json"))
+    if optn_snapshots:
+        latest = optn_snapshots[-1]
+        declared = sum(
+            int(f.get("row_count") or 0)
+            for f in json.loads(latest.read_text(encoding="utf-8")).get("files", [])
+        )
+        if declared > 0:
+            if not fate:
+                problems.append(
+                    f"us-fate-distribution is empty although {latest.parent.name} "
+                    f"declares {declared:,} OPTN rows"
+                )
+            if not any(r["country_iso3"] == "USA" for r in world):
+                problems.append(
+                    f"world-waitlist has no USA rows although {latest.parent.name} "
+                    f"declares {declared:,} OPTN rows"
+                )
+
+    if problems:
+        raise SystemExit(
+            "export aborted, a bronze source on disk contributed nothing:\n  - "
+            + "\n  - ".join(problems)
+            + "\n\nOPTN bronze is a manual snapshot. Re-download the CSVs named in "
+            "that meta.json from the Build Advanced UI into the snapshot directory, "
+            "then re-run `make build export`."
+        )
+    log.info("source contribution check passed")
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -317,15 +362,20 @@ def main(argv: list[str] | None = None) -> int:
 
     log.info("building world-waitlist.json")
     world = _build_world_waitlist(con)
+
+    log.info("building us-fate-distribution.json")
+    fate = _build_us_fate_distribution(con)
+
+    # Check before writing anything: a partial run must not leave half the
+    # artifacts refreshed and the other half emptied.
+    _assert_sources_contributed(world=world, fate=fate, log=log)
+
     _write_json(out_dir / "world-waitlist.json", world, log=log)
+    _write_json(out_dir / "us-fate-distribution.json", fate, log=log)
 
     log.info("building mexico-waitlist.json")
     mexico = _build_mexico_waitlist(con)
     _write_json(out_dir / "mexico-waitlist.json", mexico, log=log)
-
-    log.info("building us-fate-distribution.json")
-    fate = _build_us_fate_distribution(con)
-    _write_json(out_dir / "us-fate-distribution.json", fate, log=log)
 
     log.info("building meta.json")
     meta = _build_meta(con)
