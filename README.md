@@ -146,6 +146,44 @@ except OPTN is from the 2026-05-21 run, the OPTN-derived rows are older. To
 return the export to a single coherent run, re-download the three CSVs named in
 `data/raw/optn_waitlist/2026-05-19/meta.json` and run `make all`.
 
+### Runbook: re-taking the OPTN snapshot
+
+Open <https://optn.transplant.hrsa.gov/data/view-data-reports/build-advanced/>. It is an
+interactive report builder, so there is no URL to script. Build these three reports, one at a
+time, and use its CSV download on each. The exact queries are also recorded in every snapshot's
+`meta.json` under `build_queries`.
+
+| # | Category | Columns | Rows | Measure |
+|---|---|---|---|---|
+| 1 | Waiting List | Organ (all 19) | Waiting List Status (all 70) | Candidates |
+| 2 | Waiting List Additions | Organ | List Year, Waiting List Status at Listing | Candidates |
+| 3 | Waiting List Removals | Organ | Removal Year, Removal Reason, Waiting List Status at Removal | Candidates |
+
+Report 1 has no year axis; OPTN does not publish one for the current snapshot. Reports 2 and 3 go
+back to about 1988.
+
+Save them under `data/raw/optn_waitlist/<YYYY-MM-DD>/` using today's date, keeping the filenames
+OPTN gives them. The ingest checks for these three names exactly:
+
+```
+Waitlist___Organ_by_Waiting_List_Status.csv
+Waitlist_Additions___Organ_by_List_Year,_Waiting_List_Status_at_Listing.csv
+Waitlist_Removals___Organ_by_Removal_Year,_Removal_Reason,_Waiting_List_Status_at_Removal.csv
+```
+
+Then register and rebuild. Note the `data-as-of` date OPTN shows on the page, which is not the
+day you downloaded:
+
+```bash
+python -m ingest.optn_waitlist --snapshot-date <YYYY-MM-DD>   # hashes the files, writes meta.json
+make build export                                             # flatten, dbt, artifacts
+```
+
+The export refuses to write if the new snapshot declares rows that do not reach the artifacts, so
+a bad download fails loudly rather than emptying the map. Copy the resulting
+`data/exports/*.json` into the portfolio's `src/data/transplant-waitlist-atlas/` and drop the
+`provenance_note` from `meta.json`, since the run is coherent again.
+
 A third thing was wrong on the path that instruction takes. `make build` ran dbt
 without `TRANSPLANT_WAITLIST_RAW_ROOT`, so the staging views were compiled with the
 relative default `../data/raw`, which resolves only while the query runs from
