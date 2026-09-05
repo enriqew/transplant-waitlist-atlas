@@ -146,6 +146,14 @@ except OPTN is from the 2026-05-21 run, the OPTN-derived rows are older. To
 return the export to a single coherent run, re-download the three CSVs named in
 `data/raw/optn_waitlist/2026-05-19/meta.json` and run `make all`.
 
+A third thing was wrong on the path that instruction takes. `make build` ran dbt
+without `TRANSPLANT_WAITLIST_RAW_ROOT`, so the staging views were compiled with the
+relative default `../data/raw`, which resolves only while the query runs from
+`dbt_project/`. The export queries those same views from the repo root, so it died
+with a DuckDB IO error naming a directory nobody had written to, which reads like a
+missing file rather than a compiled-in path. Both targets now share one absolute
+`DBT_ENV`.
+
 ## Roadmap
 
 - [x] Repo scaffolding, shared bronze helpers, common Makefile

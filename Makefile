@@ -2,6 +2,8 @@ SHELL := /bin/bash
 PYTHON ?= python
 SNAPSHOT_DATE ?= $(shell date -u +%Y-%m-%d)
 DBT_DIR := dbt_project
+# Absolute raw root, shared by dbt and the export. See the comment on `build`.
+DBT_ENV := TRANSPLANT_WAITLIST_RAW_ROOT=$(CURDIR)/data/raw
 
 .PHONY: help install ingest prebuild build test export all clean format lint
 
@@ -30,8 +32,12 @@ ingest:
 	$(PYTHON) -m ingest.scandiatransplant_waitlist --snapshot-date $(SNAPSHOT_DATE)
 	$(PYTHON) -m ingest.anzdata_waitlist           --snapshot-date $(SNAPSHOT_DATE)
 
+# RAW_ROOT is exported for dbt too, not just for export. The staging models bake the
+# path into the view definition, so compiling them with the relative default resolves
+# only while the query runs from $(DBT_DIR); the export then queries the same view from
+# the repo root and dies with an IO error naming a path nobody wrote.
 build: prebuild
-	cd $(DBT_DIR) && dbt deps && dbt seed && dbt run
+	cd $(DBT_DIR) && $(DBT_ENV) dbt deps && $(DBT_ENV) dbt seed && $(DBT_ENV) dbt run
 
 # Prebuild: source-specific Python flatteners that turn pivot CSVs / XLSX
 # reports into long-format CSVs that dbt staging can read.
@@ -49,7 +55,7 @@ test:
 	pytest || [ $$? -eq 5 ]
 
 export:
-	TRANSPLANT_WAITLIST_RAW_ROOT=$(CURDIR)/data/raw $(PYTHON) -m export.build_artifacts
+	$(DBT_ENV) $(PYTHON) -m export.build_artifacts
 
 all: ingest build test export
 
